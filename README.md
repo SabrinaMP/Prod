@@ -14,7 +14,7 @@ Guilherme D. Reis
 Kevin Soares
 Luan Oliveira
 Sabrina M. Putsch
-Victor Bigliarde
+Victor Biglairdi
 
 https://www.youtube.com/watch?v=kqBmsLvWU14
 
