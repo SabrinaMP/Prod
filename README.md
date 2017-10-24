@@ -10,6 +10,11 @@ Regras: É expressamente proibido conversas que de certa forma sirvam de ofensa 
 Recursos Utilizados serão Layout em Swing, IDEs utilizadas NetBeans e MySql Workbench,
 a princípio o Layout seguirá a linha de chats convencionais exceto questão de colorações puxando para algo mais soturno e que passe um clima de segurança durante a utilização.
 
+Guilherme D. Reis
+Kevin Soares
+Luan Oliveira
+Sabrina M. Putsch
+Victor Bigliarde
 
 https://www.youtube.com/watch?v=kqBmsLvWU14
 
