@@ -20,3 +20,5 @@ https://www.youtube.com/watch?v=kqBmsLvWU14
 
 http://www.c-sharpcorner.com/article/how-to-make-a-chat-application-using-sockets-in-java/
 
+//principal
+https://www.youtube.com/watch?list=PLTHYycROn5oLhyxkCMVBv5LWDG3XfVnmH&v=8zLewnva66I
