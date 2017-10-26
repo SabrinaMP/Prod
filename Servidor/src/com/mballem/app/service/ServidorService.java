@@ -34,7 +34,7 @@ public class ServidorService {
             while (true) {
                 socket = serverSocket.accept();
 
-                new Thread(new listenerSocket(socket)).start();
+                new Thread(new ListenerSocket(socket)).start();
             }
 
         } catch (IOException ex) {
