@@ -5,8 +5,6 @@
  */
 package com.mballem.app.frame;
 
-import com.jgoodies.looks.plastic.PlasticLookAndFeel;
-import com.jgoodies.looks.plastic.theme.ExperienceRoyale;
 import java.awt.SystemColor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
