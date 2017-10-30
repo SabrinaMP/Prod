@@ -17,7 +17,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author Administrador
  */
 public class ClienteFrame extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form ClienteFrame
      */

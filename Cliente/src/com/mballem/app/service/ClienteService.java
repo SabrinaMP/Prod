@@ -23,7 +23,7 @@ public class ClienteService {
     public Socket connect(){
         try {
             this.socket = new Socket("localhost",5555);
-        } catch (IOException ex) {
+        }catch (IOException ex) {
             Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return socket;
