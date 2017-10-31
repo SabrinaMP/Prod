@@ -85,17 +85,35 @@ public class ClienteFrame extends javax.swing.JFrame {
         
         this.btnSair.setEnabled(true);
         this.txtAreaSend.setEnabled(true);
+        this.txtAreaReceive.setEnabled(true);
         this.btnEnviar.setEnabled(true);
         this.btnLimpar.setEnabled(true);
         this.btnAtualizar.setEnabled(true);
-        
+            
         JOptionPane.showMessageDialog(this, "Voce esta conectado no chat");
      }
      private void disconnect(ChatMenssage menssage){
-     
+        try {
+            this.Socket.close();
+            
+            this.btnConectar.setEnabled(true);
+            this.txtName.setEditable(true);
+            
+               this.btnSair.setEnabled(false);
+        this.txtAreaSend.setEnabled(false);
+        this.txtAreaReceive.setEnabled(false);
+        this.btnEnviar.setEnabled(false);
+        this.btnLimpar.setEnabled(false);
+        this.btnAtualizar.setEnabled(false);
+        
+        JOptionPane.showMessageDialog(this, "Voce saiu do chat!");
+                    
+        } catch (IOException ex) {
+            Logger.getLogger(ClienteFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
      }
      private void receive(ChatMenssage menssage){
-         this.txtAreaReceive.append(menssage.getName() + '\n');
+         this.txtAreaReceive.append(menssage.getName() + "diz :"+menssage.getText() + "\n");
      }
      private void refreshOnlines(ChatMenssage menssage){
          
