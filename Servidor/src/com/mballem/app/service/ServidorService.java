@@ -74,7 +74,7 @@ public class ServidorService {
                     } else if (action.equals(Action.SEND_ONE)) {
 
                     } else if (action.equals(Action.SEND_ALL)) {
-
+                        sendAll(menssage);
                     } else if (action.equals(Action.USERS_ONLINE)) {
 
                     }
@@ -119,7 +119,7 @@ public class ServidorService {
         
         menssage.setAction(Action.SEND_ONE);
         
-       // sendAll(menssage);
+        sendAll(menssage);
         
         System.out.println("User"+ menssage.getName() + " saiu da sala");
     }
@@ -131,7 +131,7 @@ public class ServidorService {
             Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-  /*  private void sendAll(ChatMenssage menssage) {
+    private void sendAll(ChatMenssage menssage) {
         for(Map.Entry<String, ObjectOutputStream> kv: mapOnlines.entrySet()){
             if (!kv.getKey().equals(menssage.getName())){
                 try {
@@ -141,5 +141,5 @@ public class ServidorService {
                 }
             }
         }
-    }*/
+    }
 }
