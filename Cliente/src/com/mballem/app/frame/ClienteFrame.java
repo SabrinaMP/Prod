@@ -57,7 +57,7 @@ public class ClienteFrame extends javax.swing.JFrame {
                     } else if(action.equals(Action.DISCONNCT)){
                         disconnect(menssage);
                     } else if(action.equals(Action.SEND_ONE)){
-                        sendOne(menssage);
+                        receive(menssage);
                     } else if(action.equals(Action.USERS_ONLINE)){
                         refreshOnlines(menssage);
                     }
@@ -72,13 +72,13 @@ public class ClienteFrame extends javax.swing.JFrame {
     }
      
      private void connect(ChatMenssage menssage){
-     
+        this.txtAreaReceive.append(menssage.getName() + '\n');
      }
      private void disconnect(ChatMenssage menssage){
      
      }
-     private void sendOne(ChatMenssage menssage){
-         
+     private void receive(ChatMenssage menssage){
+         this.txtAreaReceive.append(menssage.getName() + '\n');
      }
      private void refreshOnlines(ChatMenssage menssage){
          
