@@ -42,6 +42,7 @@ public class ServidorService {
         }
     }
 
+
     private class ListenerSocket implements Runnable {
 
         private ObjectOutputStream output;
@@ -69,7 +70,7 @@ public class ServidorService {
                             mapOnlines.put(menssage.getName(), output);
                         }
                     } else if (action.equals(Action.DISCONNCT)) {
-
+                        disconnect(menssage, output);
                     } else if (action.equals(Action.SEND_ONE)) {
 
                     } else if (action.equals(Action.SEND_ALL)) {
@@ -111,6 +112,18 @@ public class ServidorService {
        return false;
     }
     
+    private void disconnect(ChatMenssage menssage, ObjectOutputStream output) {
+        mapOnlines.remove(menssage.getName());
+        
+        menssage.setText("Deixou a Sala");
+        
+        menssage.setAction(Action.SEND_ONE);
+        
+       // sendAll(menssage);
+        
+        System.out.println("User"+ menssage.getName() + " saiu da sala");
+    }
+    
     private void sendOne(ChatMenssage menssage, ObjectOutputStream output){
         try {
             output.writeObject(menssage);
@@ -118,4 +131,15 @@ public class ServidorService {
             Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+  /*  private void sendAll(ChatMenssage menssage) {
+        for(Map.Entry<String, ObjectOutputStream> kv: mapOnlines.entrySet()){
+            if (!kv.getKey().equals(menssage.getName())){
+                try {
+                    kv.getValue().writeObject(menssage);
+                } catch (IOException ex) {
+                    Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }*/
 }
