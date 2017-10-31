@@ -42,6 +42,9 @@ public class ServidorService {
         }
     }
 
+    private void send(ChatMenssage menssage, ObjectOutputStream output) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     private class ListenerSocket implements Runnable {
 
@@ -66,7 +69,7 @@ public class ServidorService {
 
                     if (action.equals(Action.CONNECT)) {
                         boolean isConnect = connect(menssage, output);
-                        if(isConnect){
+                        if (isConnect) {
                             mapOnlines.put(menssage.getName(), output);
                         }
                     } else if (action.equals(Action.DISCONNCT)) {
@@ -91,49 +94,46 @@ public class ServidorService {
     }
 
     private boolean connect(ChatMenssage menssage, ObjectOutputStream output) {
-        if (mapOnlines.size() == 0){
-            menssage.setText("yes");
-            sendOne(menssage, output);
+        if (mapOnlines.size() == 0) {
+            menssage.setText("YES");
+            send(menssage, output);
             return true;
         }
-        
-        for (Map.Entry<String, ObjectOutputStream> kv : mapOnlines.entrySet()){
-            if(kv.getKey().equals(menssage.getName())){
-                menssage.setText("NO");
-                sendOne(menssage, output);
-                return false;
-            } else {
-               menssage.setText("YES");
-                sendOne(menssage, output);
-                return true;
-            }
+
+        if (mapOnlines.containsKey(menssage.getName())) {
+            menssage.setText("NO");
+            send(menssage, output);
+            return false;
+        } else {
+            menssage.setText("YES");
+            send(menssage, output);
+            return true;
         }
-        
-       return false;
     }
-    
+
     private void disconnect(ChatMenssage menssage, ObjectOutputStream output) {
         mapOnlines.remove(menssage.getName());
-        
+
         menssage.setText("Deixou a Sala");
-        
+
         menssage.setAction(Action.SEND_ONE);
-        
+
         sendAll(menssage);
-        
-        System.out.println("User"+ menssage.getName() + " saiu da sala");
+
+        System.out.println("User" + menssage.getName() + " saiu da sala");
     }
-    
-    private void sendOne(ChatMenssage menssage, ObjectOutputStream output){
+
+    private void sendOne(ChatMenssage menssage, ObjectOutputStream output) {
         try {
             output.writeObject(menssage);
         } catch (IOException ex) {
             Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     private void sendAll(ChatMenssage menssage) {
-        for(Map.Entry<String, ObjectOutputStream> kv: mapOnlines.entrySet()){
-            if (!kv.getKey().equals(menssage.getName())){
+        for (Map.Entry<String, ObjectOutputStream> kv : mapOnlines.entrySet()) {
+            if (!kv.getKey().equals(menssage.getName())) {
                 try {
                     kv.getValue().writeObject(menssage);
                 } catch (IOException ex) {
