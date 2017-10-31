@@ -9,6 +9,7 @@ import com.mballem.app.bean.ChatMenssage;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,9 +23,11 @@ public class ClienteService {
     
     public Socket connect(){
         try {
-            this.socket = new Socket("localhost",5555);
+            this.socket = new Socket("localhost", 5555);
             this.output = new ObjectOutputStream(socket.getOutputStream());
-        }catch (IOException ex) {
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return socket;
