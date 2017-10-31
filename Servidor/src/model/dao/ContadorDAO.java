@@ -55,20 +55,22 @@ public class ContadorDAO {
     /**
      * Método que atualiza um produto do banco de dados
      *
-     * @param produto (Objeto)
+     * @param contador (Objeto)
      * @return boolean
      */
 
     public boolean atualizar(Contador contador) {
-        String sql = "UPDATE produtos SET descProdutos = ?, qtd = ?, valor = ? WHERE idProduto=?";
+        String sql = "UPDATE contador SET nr_nick = ?, nr_logs = ?, nr_count_palavrao = ? WHERE cd_usuario=?";
         PreparedStatement stmt = null;
         try {
             stmt = con.prepareStatement(sql);
-            //stmt.setString(1, produto.getDescProd());
-           // stmt.setInt(2, produto.getQtd());
-            //stmt.setDouble(3, produto.getValor());
-            //stmt.setInt(4, produto.getIdProduto());
+            stmt = con.prepareStatement(sql);
+            stmt.setString(2, contador.getNm_nick());
+            stmt.setInt(3, contador.getNr_logs());
+            stmt.setInt(4, contador.getNr_count_palavrao());
+            stmt.setInt(4, contador.getCd_usuario());
             stmt.executeUpdate();
+            
 
             return true;
         } catch (SQLException ex) {

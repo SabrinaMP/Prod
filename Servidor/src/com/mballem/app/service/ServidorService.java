@@ -134,6 +134,7 @@ public class ServidorService {
     private void sendAll(ChatMenssage menssage) {
         for (Map.Entry<String, ObjectOutputStream> kv : mapOnlines.entrySet()) {
             if (!kv.getKey().equals(menssage.getName())) {
+                menssage.setAction(Action.SEND_ONE);
                 try {
                     kv.getValue().writeObject(menssage);
                 } catch (IOException ex) {
