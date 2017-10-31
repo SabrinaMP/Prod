@@ -34,13 +34,13 @@ public class ContadorDAO {
 
     //cadastro produto  
     public boolean save(Contador contador) {
-        String sql = "INSERT INTO contador(descProdutos,qtd,valor) VALUES (?,?,?)";
+        String sql = "INSERT INTO contador(nm_nick,nr_logs,nr_count_palavrao) VALUES (?,?,?)";
         PreparedStatement stmt = null;
         try {
             stmt = con.prepareStatement(sql);
-            //stmt.setString(1, produto.getDescProd());
-            //stmt.setInt(2, produto.getQtd());
-           // stmt.setDouble(3, produto.getValor());
+            stmt.setString(2, contador.getNm_nick());
+            stmt.setInt(3, contador.getNr_logs());
+            stmt.setInt(4, contador.getNr_count_palavrao());
             stmt.executeUpdate();
 
             return true;
