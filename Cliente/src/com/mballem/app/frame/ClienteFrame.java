@@ -5,7 +5,13 @@
  */
 package com.mballem.app.frame;
 
+import com.mballem.app.bean.ChatMenssage;
+import com.mballem.app.bean.ChatMenssage.Action;
+import com.mballem.app.service.ClienteService;
 import java.awt.SystemColor;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
@@ -17,14 +23,66 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author Administrador
  */
 public class ClienteFrame extends javax.swing.JFrame {
-    
+    private Socket Socket;
+    private ChatMenssage menssage;
+    private ClienteService service;
     /**
      * Creates new form ClienteFrame
      */
     public ClienteFrame() {
         initComponents();
     }
+     private class listenerSocket implements Runnable{
+        
+        private ObjectInputStream input;
+        public listenerSocket(Socket socket){
+            try {
+                this.input = new ObjectInputStream(socket.getInputStream());
+            } catch (IOException ex) {
+                Logger.getLogger(ClienteFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        @Override
+        public void run() {
+            
+                ChatMenssage menssage = null;
+            try {
+            
+                
+                while((menssage = (ChatMenssage) input.readObject()) != null){
+                    Action action = menssage.getAction();
+                    if(action.equals(Action.CONNECT)){
+                        connect(menssage);
+                    } else if(action.equals(Action.DISCONNCT)){
+                        disconnect(menssage);
+                    } else if(action.equals(Action.SEND_ONE)){
+                        sendOne(menssage);
+                    } else if(action.equals(Action.USERS_ONLINE)){
+                        refreshOnlines(menssage);
+                    }
 
+                }  
+            } catch (IOException ex) {
+                Logger.getLogger(ClienteFrame.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ClienteFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+     
+     private void connect(ChatMenssage menssage){
+     
+     }
+     private void disconnect(ChatMenssage menssage){
+     
+     }
+     private void sendOne(ChatMenssage menssage){
+         
+     }
+     private void refreshOnlines(ChatMenssage menssage){
+         
+     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -70,6 +128,11 @@ public class ClienteFrame extends javax.swing.JFrame {
         btnConnectar.setBackground(new java.awt.Color(0, 255, 0));
         btnConnectar.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
         btnConnectar.setText("Connectar");
+        btnConnectar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConnectarActionPerformed(evt);
+            }
+        });
 
         btnSair.setBackground(new java.awt.Color(255, 51, 51));
         btnSair.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
@@ -238,6 +301,26 @@ public class ClienteFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
       
     }//GEN-LAST:event_formWindowOpened
+
+    private void btnConnectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectarActionPerformed
+      String name = this.txtName.getText();
+      
+      if(!name.isEmpty()){
+          this.menssage = new ChatMenssage();
+          this.menssage.setAction(Action.CONNECT);
+          this.menssage.setName(name);
+          
+          if(this.Socket == null){
+              this.service = new ClienteService();
+              this.Socket = this.service.connect();
+              
+              
+              new Thread(new listenerSocket(this.Socket)).start();
+          }
+          this.service.send(menssage);
+      }
+      
+    }//GEN-LAST:event_btnConnectarActionPerformed
 
 
 
