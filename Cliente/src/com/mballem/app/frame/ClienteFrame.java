@@ -14,6 +14,7 @@ import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -72,8 +73,23 @@ public class ClienteFrame extends javax.swing.JFrame {
         }
     }
      
-     private void connect(ChatMenssage menssage){
-        this.txtAreaReceive.append(menssage.getName() + '\n');
+       private void connect(ChatMenssage menssage){
+         if(menssage.getText().equals("NO")) {
+             this.txtName.setText("");
+             JOptionPane.showMessageDialog(this, "conexão não realizada, tente novamente com um novo nome.");
+             return;
+         }
+        this.menssage = menssage;
+        this.btnConectar.setEnabled(false);
+        this.txtName.setEditable(false);
+        
+        this.btnSair.setEnabled(true);
+        this.txtAreaSend.setEnabled(true);
+        this.btnEnviar.setEnabled(true);
+        this.btnLimpar.setEnabled(true);
+        this.btnAtualizar.setEnabled(true);
+        
+        JOptionPane.showMessageDialog(this, "Voce esta conectado no chat");
      }
      private void disconnect(ChatMenssage menssage){
      
