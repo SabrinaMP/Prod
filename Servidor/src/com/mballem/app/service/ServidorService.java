@@ -13,7 +13,9 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,7 +32,7 @@ public class ServidorService {
     public ServidorService() {
         try {
             serverSocket = new ServerSocket(5555);
-
+            System.out.println("Servidor on!");
             while (true) {
                 socket = serverSocket.accept();
 
@@ -62,29 +64,33 @@ public class ServidorService {
 
         @Override
         public void run() {
-            ChatMenssage menssage = null;
+            ChatMenssage message = null;
             try {
-                while ((menssage = (ChatMenssage) input.readObject()) != null) {
-                    Action action = menssage.getAction();
+                while ((message = (ChatMenssage) input.readObject()) != null) {
+                    Action action = message.getAction();
 
                     if (action.equals(Action.CONNECT)) {
-                        boolean isConnect = connect(menssage, output);
+                        boolean isConnect = connect(message, output);
                         if (isConnect) {
-                            mapOnlines.put(menssage.getName(), output);
+                            mapOnlines.put(message.getName(), output);
+                            sendOnlines();
                         }
                     } else if (action.equals(Action.DISCONNCT)) {
-                        disconnect(menssage, output);
+                        disconnect(message, output);
+                        sendOnlines();
+                        return;
                     } else if (action.equals(Action.SEND_ONE)) {
-
+                        sendOne(message, output);
                     } else if (action.equals(Action.SEND_ALL)) {
-                        sendAll(menssage);
-                    } else if (action.equals(Action.USERS_ONLINE)) {
-
+                        sendAll(message);
                     }
-
                 }
             } catch (IOException ex) {
-                Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
+                ChatMenssage cm = new ChatMenssage();
+                cm.setName(message.getName());
+                disconnect(cm, output);
+                sendOnlines();
+                System.out.println(message.getName() + " deixou o chat!");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -140,6 +146,25 @@ public class ServidorService {
                 } catch (IOException ex) {
                     Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }
+        }
+    }
+    private void sendOnlines() {
+        Set<String> setNames = new HashSet<String>();
+        for (Map.Entry<String, ObjectOutputStream> kv : mapOnlines.entrySet()) {
+            setNames.add(kv.getKey());
+        }
+
+        ChatMenssage message = new ChatMenssage();
+        message.setAction(Action.USERS_ONLINE);
+        message.setSetOnlines(setNames);
+
+        for (Map.Entry<String, ObjectOutputStream> kv : mapOnlines.entrySet()) {
+            message.setName(kv.getKey());
+            try {
+                kv.getValue().writeObject(message);
+            } catch (IOException ex) {
+                Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
