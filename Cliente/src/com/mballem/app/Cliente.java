@@ -12,7 +12,6 @@ import com.mballem.app.frame.ClienteFrame;
  * @author Administrador
  */
 public class Cliente {
-
     /**
      * @param args the command line arguments
      */
@@ -39,6 +38,13 @@ public class Cliente {
             java.util.logging.Logger.getLogger(ClienteFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -47,5 +53,4 @@ public class Cliente {
             }
         });
     }
-    
 }

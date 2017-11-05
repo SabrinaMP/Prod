@@ -24,47 +24,49 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author victor
  */
 public class ClienteFrame extends javax.swing.JFrame {
+
     private Socket Socket;
     private ChatMenssage menssage;
     private ClienteService service;
-    
+
     /**
      * Creates new form ServidorView
      */
     public ClienteFrame() {
         initComponents();
     }
-    private class listenerSocket implements Runnable{
-        
+
+    private class listenerSocket implements Runnable {
+
         private ObjectInputStream input;
-        public listenerSocket(Socket socket){
+
+        public listenerSocket(Socket socket) {
             try {
                 this.input = new ObjectInputStream(socket.getInputStream());
             } catch (IOException ex) {
                 Logger.getLogger(ClienteFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         @Override
         public void run() {
-            
-                ChatMenssage menssage = null;
+
+            ChatMenssage menssage = null;
             try {
-            
-                
-                while((menssage = (ChatMenssage) input.readObject()) != null){
+
+                while ((menssage = (ChatMenssage) input.readObject()) != null) {
                     Action action = menssage.getAction();
-                    if(action.equals(Action.CONNECT)){
+                    if (action.equals(Action.CONNECT)) {
                         connect(menssage);
-                    } else if(action.equals(Action.DISCONNCT)){
+                    } else if (action.equals(Action.DISCONNCT)) {
                         disconnect(menssage);
-                    } else if(action.equals(Action.SEND_ONE)){
+                    } else if (action.equals(Action.SEND_ONE)) {
                         receive(menssage);
-                    } else if(action.equals(Action.USERS_ONLINE)){
+                    } else if (action.equals(Action.USERS_ONLINE)) {
                         refreshOnlines(menssage);
                     }
 
-                }  
+                }
             } catch (IOException ex) {
                 Logger.getLogger(ClienteFrame.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
@@ -72,52 +74,55 @@ public class ClienteFrame extends javax.swing.JFrame {
             }
         }
     }
-     
-       private void connect(ChatMenssage menssage){
-         if(menssage.getText().equals("NO")) {
-             this.txtName.setText("");
-             JOptionPane.showMessageDialog(this, "conexão não realizada, tente novamente com um novo nome.");
-             return;
-         }
+
+    private void connect(ChatMenssage menssage) {
+        if (menssage.getText().equals("NO")) {
+            this.txtName.setText("");
+            JOptionPane.showMessageDialog(this, "conexão não realizada, tente novamente com um novo nome.");
+            return;
+        }
         this.menssage = menssage;
         this.btnConectar.setEnabled(false);
         this.txtName.setEditable(false);
-        
+
         this.btnSair.setEnabled(true);
         this.txtAreaSend.setEnabled(true);
         this.txtAreaReceive.setEnabled(true);
         this.btnEnviar.setEnabled(true);
         this.btnLimpar.setEnabled(true);
         this.btnAtualizar.setEnabled(true);
-            
+
         JOptionPane.showMessageDialog(this, "Voce esta conectado no chat");
-     }
-     private void disconnect(ChatMenssage menssage){
+    }
+
+    private void disconnect(ChatMenssage menssage) {
         try {
             this.Socket.close();
-            
+
             this.btnConectar.setEnabled(true);
             this.txtName.setEditable(true);
-            
-               this.btnSair.setEnabled(false);
-        this.txtAreaSend.setEnabled(false);
-        this.txtAreaReceive.setEnabled(false);
-        this.btnEnviar.setEnabled(false);
-        this.btnLimpar.setEnabled(false);
-        this.btnAtualizar.setEnabled(false);
-        
-        JOptionPane.showMessageDialog(this, "Voce saiu do chat!");
-                    
+
+            this.btnSair.setEnabled(false);
+            this.txtAreaSend.setEnabled(false);
+            this.txtAreaReceive.setEnabled(false);
+            this.btnEnviar.setEnabled(false);
+            this.btnLimpar.setEnabled(false);
+            this.btnAtualizar.setEnabled(false);
+
+            JOptionPane.showMessageDialog(this, "Voce saiu do chat!");
+
         } catch (IOException ex) {
             Logger.getLogger(ClienteFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-     }
-     private void receive(ChatMenssage menssage){
-         this.txtAreaReceive.append(menssage.getName() + "diz :"+menssage.getText() + "\n");
-     }
-     private void refreshOnlines(ChatMenssage menssage){
-         
-     }
+    }
+
+    private void receive(ChatMenssage menssage) {
+        this.txtAreaReceive.append(menssage.getName() + "diz :" + menssage.getText() + "\n");
+    }
+
+    private void refreshOnlines(ChatMenssage menssage) {
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -296,14 +301,14 @@ public class ClienteFrame extends javax.swing.JFrame {
 
     private void txtAreaSendKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAreaSendKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == evt.VK_ENTER){
+        if (evt.getKeyCode() == evt.VK_ENTER) {
             //MÉTODO DO BOTÃO AQUI
         }
     }//GEN-LAST:event_txtAreaSendKeyPressed
 
     private void btnEnviarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnEnviarKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == evt.VK_ENTER){
+        if (evt.getKeyCode() == evt.VK_ENTER) {
             //MÉTODO DO BOTÃO AQUI
         }
     }//GEN-LAST:event_btnEnviarKeyPressed
@@ -311,64 +316,23 @@ public class ClienteFrame extends javax.swing.JFrame {
     private void btnConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConectarActionPerformed
         // TODO add your handling code here:
         String name = this.txtName.getText();
-      
-      if(!name.isEmpty()){
-          this.menssage = new ChatMenssage();
-          this.menssage.setAction(Action.CONNECT);
-          this.menssage.setName(name);
-          
-          if(this.Socket == null){
-              this.service = new ClienteService();
-              this.Socket = this.service.connect();
-              
-              
-              new Thread(new listenerSocket(this.Socket)).start();
-          }
-          this.service.send(menssage);
-      }
+
+        if (!name.isEmpty()) {
+            this.menssage = new ChatMenssage();
+            this.menssage.setAction(Action.CONNECT);
+            this.menssage.setName(name);
+
+            if (this.Socket == null) {
+                this.service = new ClienteService();
+                this.Socket = this.service.connect();
+
+                new Thread(new listenerSocket(this.Socket)).start();
+            }
+            this.service.send(menssage);
+        }
     }//GEN-LAST:event_btnConectarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ClienteFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ClienteFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ClienteFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ClienteFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ClienteFrame().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtualizar;
