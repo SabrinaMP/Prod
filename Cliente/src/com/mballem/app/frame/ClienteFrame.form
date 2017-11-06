@@ -163,6 +163,9 @@
               <Dimension value="[77, 23]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSairActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
@@ -243,6 +246,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="REFRESH"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAtualizarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnLimpar">
           <Properties>
@@ -257,6 +263,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="CLEAR"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimparActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnEnviar">
           <Properties>
@@ -272,6 +281,7 @@
             <Property name="text" type="java.lang.String" value="ENTER"/>
           </Properties>
           <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEnviarActionPerformed"/>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btnEnviarKeyPressed"/>
           </Events>
         </Component>

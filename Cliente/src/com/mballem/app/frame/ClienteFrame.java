@@ -12,9 +12,12 @@ import java.awt.SystemColor;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -37,7 +40,6 @@ public class ClienteFrame extends javax.swing.JFrame {
     }
 
     private class listenerSocket implements Runnable {
-
         private ObjectInputStream input;
 
         public listenerSocket(Socket socket) {
@@ -50,22 +52,22 @@ public class ClienteFrame extends javax.swing.JFrame {
 
         @Override
         public void run() {
-
-            ChatMenssage menssage = null;
+            ChatMenssage message = null;
             try {
+                while ((message = (ChatMenssage) input.readObject()) != null) {
+                    Action action = message.getAction();
 
-                while ((menssage = (ChatMenssage) input.readObject()) != null) {
-                    Action action = menssage.getAction();
                     if (action.equals(Action.CONNECT)) {
-                        connect(menssage);
+                        connect(message);
                     } else if (action.equals(Action.DISCONNCT)) {
                         disconnect(menssage);
+                        Socket.close();
                     } else if (action.equals(Action.SEND_ONE)) {
-                        receive(menssage);
+                        System.out.println("::: " + message.getText() + " :::");
+                        receive(message);
                     } else if (action.equals(Action.USERS_ONLINE)) {
-                        refreshOnlines(menssage);
+                        refreshOnlines(message);
                     }
-
                 }
             } catch (IOException ex) {
                 Logger.getLogger(ClienteFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -78,9 +80,10 @@ public class ClienteFrame extends javax.swing.JFrame {
     private void connect(ChatMenssage menssage) {
         if (menssage.getText().equals("NO")) {
             this.txtName.setText("");
-            JOptionPane.showMessageDialog(this, "conexão não realizada, tente novamente com um novo nome.");
+            JOptionPane.showMessageDialog(this, "Conexão não realizada!\nTente novamente com um novo nome.");
             return;
         }
+
         this.menssage = menssage;
         this.btnConectar.setEnabled(false);
         this.txtName.setEditable(false);
@@ -90,30 +93,24 @@ public class ClienteFrame extends javax.swing.JFrame {
         this.txtAreaReceive.setEnabled(true);
         this.btnEnviar.setEnabled(true);
         this.btnLimpar.setEnabled(true);
-        this.btnAtualizar.setEnabled(true);
 
-        JOptionPane.showMessageDialog(this, "Voce esta conectado no chat");
+        JOptionPane.showMessageDialog(this, "Você está conectado no chat!");
     }
 
     private void disconnect(ChatMenssage menssage) {
-        try {
-            this.Socket.close();
+        this.btnConectar.setEnabled(true);
+        this.txtName.setEditable(true);
 
-            this.btnConectar.setEnabled(true);
-            this.txtName.setEditable(true);
+        this.btnSair.setEnabled(false);
+        this.txtAreaSend.setEnabled(false);
+        this.txtAreaReceive.setEnabled(false);
+        this.btnEnviar.setEnabled(false);
+        this.btnLimpar.setEnabled(false);
+        
+        this.txtAreaReceive.setText("");
+        this.txtAreaSend.setText("");
 
-            this.btnSair.setEnabled(false);
-            this.txtAreaSend.setEnabled(false);
-            this.txtAreaReceive.setEnabled(false);
-            this.btnEnviar.setEnabled(false);
-            this.btnLimpar.setEnabled(false);
-            this.btnAtualizar.setEnabled(false);
-
-            JOptionPane.showMessageDialog(this, "Voce saiu do chat!");
-
-        } catch (IOException ex) {
-            Logger.getLogger(ClienteFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        JOptionPane.showMessageDialog(this, "Você saiu do chat!");
     }
 
     private void receive(ChatMenssage menssage) {
@@ -121,6 +118,18 @@ public class ClienteFrame extends javax.swing.JFrame {
     }
 
     private void refreshOnlines(ChatMenssage menssage) {
+        
+        System.out.println(menssage.getSetOnlines().toString());
+        
+        Set<String> names = menssage.getSetOnlines();
+        
+        names.remove(menssage.getName());
+        
+        String[] array = (String[]) names.toArray(new String[names.size()]);
+        
+        this.listOnlines.setListData(array);
+        this.listOnlines.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.listOnlines.setLayoutOrientation(JList.VERTICAL);
 
     }
 
@@ -171,6 +180,11 @@ public class ClienteFrame extends javax.swing.JFrame {
         btnSair.setForeground(new java.awt.Color(255, 255, 255));
         btnSair.setText("EXIT");
         btnSair.setPreferredSize(new java.awt.Dimension(77, 23));
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         txtAreaReceive.setEditable(false);
         txtAreaReceive.setColumns(20);
@@ -200,16 +214,31 @@ public class ClienteFrame extends javax.swing.JFrame {
         btnAtualizar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnAtualizar.setForeground(new java.awt.Color(255, 255, 255));
         btnAtualizar.setText("REFRESH");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarActionPerformed(evt);
+            }
+        });
 
         btnLimpar.setBackground(new java.awt.Color(0, 0, 0));
         btnLimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnLimpar.setForeground(new java.awt.Color(255, 255, 255));
         btnLimpar.setText("CLEAR");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
 
         btnEnviar.setBackground(new java.awt.Color(0, 0, 0));
         btnEnviar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnEnviar.setForeground(new java.awt.Color(255, 255, 255));
         btnEnviar.setText("ENTER");
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarActionPerformed(evt);
+            }
+        });
         btnEnviar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnEnviarKeyPressed(evt);
@@ -314,7 +343,6 @@ public class ClienteFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEnviarKeyPressed
 
     private void btnConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConectarActionPerformed
-        // TODO add your handling code here:
         String name = this.txtName.getText();
 
         if (!name.isEmpty()) {
@@ -322,15 +350,56 @@ public class ClienteFrame extends javax.swing.JFrame {
             this.menssage.setAction(Action.CONNECT);
             this.menssage.setName(name);
 
-            if (this.Socket == null) {
-                this.service = new ClienteService();
-                this.Socket = this.service.connect();
+            this.service = new ClienteService();
+            this.Socket = this.service.connect();
 
-                new Thread(new listenerSocket(this.Socket)).start();
-            }
+            new Thread(new listenerSocket(this.Socket)).start();
+
             this.service.send(menssage);
         }
     }//GEN-LAST:event_btnConectarActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        ChatMenssage message = new ChatMenssage();
+        message.setName(this.menssage.getName());
+        message.setAction(Action.DISCONNCT);
+        this.service.send(message);
+        disconnect(menssage);
+    }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        this.txtAreaSend.setText("");
+    }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+        String text = this.txtAreaSend.getText();
+        String name = this.menssage.getName();
+        
+        this.menssage = new ChatMenssage();
+        
+        if (this.listOnlines.getSelectedIndex() > -1) {
+            this.menssage.setNameReserved((String) this.listOnlines.getSelectedValue());
+            this.menssage.setAction(Action.SEND_ONE);
+            this.listOnlines.clearSelection();
+        } else {
+            this.menssage.setAction(Action.SEND_ALL);
+        }
+        
+        if (!text.isEmpty()) {
+            this.menssage.setName(name);
+            this.menssage.setText(text);
+
+            this.txtAreaReceive.append("Você disse: " + text + "\n");
+            
+            this.service.send(this.menssage);
+        }
+        
+        this.txtAreaSend.setText("");
+    }//GEN-LAST:event_btnEnviarActionPerformed
 
 
 
