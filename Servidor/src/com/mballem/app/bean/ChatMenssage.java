@@ -15,7 +15,7 @@ import java.util.Set;
  * @author Administrador
  */
 public class ChatMenssage implements Serializable {
-    private String name;
+        private String name;
     private String text;
     private String nameReserved;
     private Set<String> setOnlines = new HashSet<String>();
