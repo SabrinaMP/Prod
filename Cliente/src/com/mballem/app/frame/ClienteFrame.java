@@ -60,7 +60,7 @@ public class ClienteFrame extends javax.swing.JFrame {
                     if (action.equals(Action.CONNECT)) {
                         connect(message);
                     } else if (action.equals(Action.DISCONNCT)) {
-                        disconnect(menssage);
+                        disconnect();
                         Socket.close();
                     } else if (action.equals(Action.SEND_ONE)) {
                         System.out.println("::: " + message.getText() + " :::");
@@ -97,7 +97,7 @@ public class ClienteFrame extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Você está conectado no chat!");
     }
 
-    private void disconnect(ChatMenssage menssage) {
+    private void disconnect() {
         this.btnConectar.setEnabled(true);
         this.txtName.setEditable(true);
 
@@ -348,15 +348,14 @@ public class ClienteFrame extends javax.swing.JFrame {
         if (!name.isEmpty()) {
             this.menssage = new ChatMenssage();
             this.menssage.setAction(Action.CONNECT);
-            this.menssage.setName(name);
+            this.menssage.setName(name);    
 
             this.service = new ClienteService();
             this.Socket = this.service.connect();
 
             new Thread(new listenerSocket(this.Socket)).start();
-
-            this.service.send(menssage);
         }
+        this.service.send(menssage);
     }//GEN-LAST:event_btnConectarActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
@@ -364,7 +363,7 @@ public class ClienteFrame extends javax.swing.JFrame {
         message.setName(this.menssage.getName());
         message.setAction(Action.DISCONNCT);
         this.service.send(message);
-        disconnect(menssage);
+        disconnect();
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed

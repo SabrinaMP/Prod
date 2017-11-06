@@ -21,7 +21,7 @@ public class ClienteService {
     private Socket socket;
     private ObjectOutputStream output;
     
-    public Socket connect(){
+    public Socket connect() {
         try {
             this.socket = new Socket("localhost", 8080);
             this.output = new ObjectOutputStream(socket.getOutputStream());
@@ -30,11 +30,13 @@ public class ClienteService {
         } catch (IOException ex) {
             Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         return socket;
     }
-    public void send(ChatMenssage message){
+    
+    public void send(ChatMenssage menssage) {
         try {
-            output.writeObject(message);
+            output.writeObject(menssage);
         } catch (IOException ex) {
             Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);
         }
