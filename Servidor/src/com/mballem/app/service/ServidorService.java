@@ -31,7 +31,7 @@ public class ServidorService {
 
     public ServidorService() {
         try {
-            serverSocket = new ServerSocket(5555);
+            serverSocket = new ServerSocket(8080);
             System.out.println("Servidor on!");
             while (true) {
                 socket = serverSocket.accept();
