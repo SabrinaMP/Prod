@@ -130,10 +130,14 @@ public class ServidorService {
     }
 
     private void sendOne(ChatMenssage menssage, ObjectOutputStream output) {
-        try {
-            output.writeObject(menssage);
-        } catch (IOException ex) {
-            Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
+        for (Map.Entry<String, ObjectOutputStream> kv : mapOnlines.entrySet()) {
+            if (kv.getKey().equals(menssage.getNameReserved())) {
+                try {
+                    kv.getValue().writeObject(menssage);
+                } catch (IOException ex) {
+                    Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
     }
 
