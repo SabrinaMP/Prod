@@ -31,7 +31,8 @@ public class ServidorService {
 
     public ServidorService() {
         try {
-            serverSocket = new ServerSocket(8080);
+            serverSocket = new ServerSocket(5555);
+
             System.out.println("Servidor on!");
             while (true) {
                 socket = serverSocket.accept();
@@ -45,7 +46,11 @@ public class ServidorService {
     }
 
     private void send(ChatMenssage menssage, ObjectOutputStream output) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            output.writeObject(menssage);
+        } catch (IOException ex) {
+            Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private class ListenerSocket implements Runnable {
