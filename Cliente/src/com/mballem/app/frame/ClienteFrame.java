@@ -21,6 +21,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import model.bean.Contador;
+import model.dao.ContadorDAO;
 
 /**
  *
@@ -95,6 +97,14 @@ public class ClienteFrame extends javax.swing.JFrame {
         this.btnLimpar.setEnabled(true);
 
         JOptionPane.showMessageDialog(this, "Você está conectado no chat!");
+        
+        
+        String nick = new String(txtName.getText());
+        
+        Contador p = new Contador(nick);
+        ContadorDAO dao = new ContadorDAO();
+        
+        p.setNm_nick(nick);
     }
 
     private void disconnect() {
