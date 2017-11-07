@@ -85,6 +85,7 @@ public class ClienteFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Conexão não realizada!\nTente novamente com um novo nome.");
             return;
         }
+        
 
         this.menssage = menssage;
         this.btnConectar.setEnabled(false);
@@ -175,6 +176,11 @@ public class ClienteFrame extends javax.swing.JFrame {
         txtName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtName.setToolTipText("");
         txtName.setBorder(null);
+        txtName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNameFocusLost(evt);
+            }
+        });
 
         btnConectar.setBackground(new java.awt.Color(0, 0, 0));
         btnConectar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -360,6 +366,11 @@ public class ClienteFrame extends javax.swing.JFrame {
             btnEnviar.enable(true);
             btnLimpar.enable(true);
             btnSair.enable(true);
+            
+        }else{
+            this.txtName.setText("");
+            JOptionPane.showMessageDialog(this, "Conexão não realizada!\nDigite um Nickname.");
+            return;
         }
         this.service.send(menssage);
     }//GEN-LAST:event_btnConectarActionPerformed
@@ -405,6 +416,11 @@ public class ClienteFrame extends javax.swing.JFrame {
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         enter();
     }//GEN-LAST:event_btnEnviarActionPerformed
+
+    private void txtNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameFocusLost
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txtNameFocusLost
 
 
 
