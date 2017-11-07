@@ -99,12 +99,6 @@ public class ClienteFrame extends javax.swing.JFrame {
 
         JOptionPane.showMessageDialog(this, "Você está conectado no chat!");
 
-        String nick = new String(txtName.getText());
-
-        Contador p = new Contador(nick);
-        ContadorDAO dao = new ContadorDAO();
-
-        p.setNm_nick(nick);
     }
 
     private void disconnect() {

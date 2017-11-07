@@ -10,11 +10,26 @@ package model.bean;
  * @author victo
  */
 public class Contador {
-
+    private int cd_usuario;
     private String nm_nick;
 
-    public Contador(String nm_nick) {
+    /**
+     * 
+     * @param cd_usuario
+     * @param nm_nick
+     * @param nr_logs
+     * @param nr_count_palavrao 
+     */
+    public Contador(){
         this.nm_nick = nm_nick;
+    }
+
+    public int getCd_usuario() {
+        return cd_usuario;
+    }
+
+    public void setCd_usuario(int cd_usuario) {
+        this.cd_usuario = cd_usuario;
     }
 
     public String getNm_nick() {
