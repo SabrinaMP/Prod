@@ -162,7 +162,6 @@ public class ClienteFrame extends javax.swing.JFrame {
         txtAreaSend = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         listOnlines = new javax.swing.JList<>();
-        btnAtualizar = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
         btnEnviar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -173,6 +172,8 @@ public class ClienteFrame extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
+        txtName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtName.setToolTipText("");
         txtName.setBorder(null);
 
         btnConectar.setBackground(new java.awt.Color(0, 0, 0));
@@ -189,6 +190,7 @@ public class ClienteFrame extends javax.swing.JFrame {
         btnSair.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSair.setForeground(new java.awt.Color(255, 255, 255));
         btnSair.setText("EXIT");
+        btnSair.setEnabled(false);
         btnSair.setPreferredSize(new java.awt.Dimension(77, 23));
         btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,26 +216,17 @@ public class ClienteFrame extends javax.swing.JFrame {
         jScrollPane2.setViewportView(txtAreaSend);
 
         listOnlines.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "--------" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
         jScrollPane3.setViewportView(listOnlines);
 
-        btnAtualizar.setBackground(new java.awt.Color(0, 0, 0));
-        btnAtualizar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnAtualizar.setForeground(new java.awt.Color(255, 255, 255));
-        btnAtualizar.setText("REFRESH");
-        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAtualizarActionPerformed(evt);
-            }
-        });
-
         btnLimpar.setBackground(new java.awt.Color(0, 0, 0));
         btnLimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnLimpar.setForeground(new java.awt.Color(255, 255, 255));
-        btnLimpar.setText("CLEAR");
+        btnLimpar.setText("LIMPAR");
+        btnLimpar.setEnabled(false);
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimparActionPerformed(evt);
@@ -243,7 +236,8 @@ public class ClienteFrame extends javax.swing.JFrame {
         btnEnviar.setBackground(new java.awt.Color(0, 0, 0));
         btnEnviar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnEnviar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEnviar.setText("ENTER");
+        btnEnviar.setText("ENVIAR");
+        btnEnviar.setEnabled(false);
         btnEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEnviarActionPerformed(evt);
@@ -257,7 +251,7 @@ public class ClienteFrame extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Access Área");
+        jLabel1.setText("Nick Name");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -271,7 +265,6 @@ public class ClienteFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
-                    .addComponent(btnAtualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnEnviar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -285,7 +278,7 @@ public class ClienteFrame extends javax.swing.JFrame {
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(250, Short.MAX_VALUE)
+                .addContainerGap(256, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(248, 248, 248))
         );
@@ -301,11 +294,8 @@ public class ClienteFrame extends javax.swing.JFrame {
                     .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnConectar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnAtualizar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -316,6 +306,8 @@ public class ClienteFrame extends javax.swing.JFrame {
                         .addComponent(btnEnviar)))
                 .addGap(58, 58, 58))
         );
+
+        txtName.getAccessibleContext().setAccessibleName("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -342,6 +334,7 @@ public class ClienteFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (evt.getKeyCode() == evt.VK_ENTER) {
             //MÉTODO DO BOTÃO AQUI
+            enter();
         }
     }//GEN-LAST:event_txtAreaSendKeyPressed
 
@@ -364,27 +357,14 @@ public class ClienteFrame extends javax.swing.JFrame {
             this.Socket = this.service.connect();
 
             new Thread(new listenerSocket(this.Socket)).start();
+            btnEnviar.enable(true);
+            btnLimpar.enable(true);
+            btnSair.enable(true);
         }
         this.service.send(menssage);
     }//GEN-LAST:event_btnConectarActionPerformed
-
-    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
-        ChatMenssage message = new ChatMenssage();
-        message.setName(this.menssage.getName());
-        message.setAction(Action.DISCONNCT);
-        this.service.send(message);
-        disconnect();
-    }//GEN-LAST:event_btnSairActionPerformed
-
-    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAtualizarActionPerformed
-
-    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        this.txtAreaSend.setText("");
-    }//GEN-LAST:event_btnLimparActionPerformed
-
-    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+ 
+    public void enter(){
         String text = this.txtAreaSend.getText();
         String name = this.menssage.getName();
         
@@ -408,12 +388,27 @@ public class ClienteFrame extends javax.swing.JFrame {
         }
         
         this.txtAreaSend.setText("");
+        
+    }
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        ChatMenssage message = new ChatMenssage();
+        message.setName(this.menssage.getName());
+        message.setAction(Action.DISCONNCT);
+        this.service.send(message);
+        disconnect();
+    }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        this.txtAreaSend.setText("");
+    }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+        enter();
     }//GEN-LAST:event_btnEnviarActionPerformed
 
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnConectar;
     private javax.swing.JButton btnEnviar;
     private javax.swing.JButton btnLimpar;

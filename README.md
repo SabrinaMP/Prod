@@ -7,7 +7,7 @@ Imagine poder falar sobre qualquer coisa, a qualquer momento, com qualquer pesso
 Regras: É expressamente proibido conversas que de certa forma sirvam de ofensa a qualquer tipo de estilo de vida, assuntos que envolvam qualquer forma de preconceito ou ameaça.
 
 
-Recursos Utilizados serão Layout em Swing, IDEs utilizadas NetBeans e MySql Workbench,
+Recursos Utilizados serão Layout em Swing, IDEs utilizadas NetBeans e Php my admin,
 a princípio o Layout seguirá a linha de chats convencionais exceto questão de colorações puxando para algo mais soturno e que passe um clima de segurança durante a utilização.
 
 Guilherme D. Reis,
