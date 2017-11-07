@@ -12,10 +12,17 @@ import java.util.Set;
 
 /**
  *
- * @author Administrador
+ * @author Guilher D
+ * @author Kevin S
+ * @author Luan J
+ * @author Sabrina M
+ * @author Victor B
+ * 
+ * @version 1 
+ * construtor, gets e sets
  */
 public class ChatMenssage implements Serializable {
-        private String name;
+    private String name;
     private String text;
     private String nameReserved;
     private Set<String> setOnlines = new HashSet<String>();

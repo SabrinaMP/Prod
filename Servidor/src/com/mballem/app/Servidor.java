@@ -9,12 +9,21 @@ import com.mballem.app.service.ServidorService;
 
 /**
  *
- * @author Administrador
+ * @author Guilher D
+ * @author Kevin S
+ * @author Luan J
+ * @author Sabrina M
+ * @author Victor B
+ * 
+ * @version 1
+ * 
+ * 
  */
 public class Servidor {
 
     /**
-     * @param args the command line arguments
+     * Inicializa o servidor
+     * @param args os argumentos da linha de comando
      */
     public static void main(String[] args) {
         new ServidorService();

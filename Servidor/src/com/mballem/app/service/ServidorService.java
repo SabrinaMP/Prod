@@ -20,14 +20,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author Administrador
+ * @author Guilher D
+ * @author Kevin S
+ * @author Luan J
+ * @author Sabrina M
+ * @author Victor B
+ * 
+ * @version 1
  */
 public class ServidorService {
     private ServerSocket serverSocket;
     private Socket socket;
     private Map<String, ObjectOutputStream> mapOnlines = new HashMap<String, ObjectOutputStream>();
-
+    /**
+     * Conexão com servidor
+     */
     public ServidorService() {
         try {
             serverSocket = new ServerSocket(8080);
@@ -44,7 +51,9 @@ public class ServidorService {
             Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    /**
+     * 
+     */
     private class ListenerSocket implements Runnable {
         private ObjectOutputStream output;
         private ObjectInputStream input;
@@ -57,7 +66,9 @@ public class ServidorService {
                 Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
+        /**
+         * 
+         */
         @Override
         public void run() {
             ChatMenssage menssage = null;
@@ -92,7 +103,12 @@ public class ServidorService {
             }
         }
     }
-
+    /**
+     * 
+     * @param menssage
+     * @param output
+     * @return boolean
+     */
     private boolean connect(ChatMenssage menssage, ObjectOutputStream output) {
         if (mapOnlines.size() == 0) {
             menssage.setText("YES");
@@ -110,6 +126,11 @@ public class ServidorService {
             return true;
         }
     }
+    /**
+     * 
+     * @param menssage
+     * @param output 
+     */
 
     private void disconnect(ChatMenssage menssage, ObjectOutputStream output) {
         mapOnlines.remove(menssage.getName());
@@ -122,7 +143,11 @@ public class ServidorService {
 
         System.out.println("User " + menssage.getName() + " sai da sala");
     }
-
+    /**
+     * 
+     * @param message
+     * @param output 
+     */
     private void send(ChatMenssage message, ObjectOutputStream output) {
         try {
             output.writeObject(message);
@@ -130,7 +155,10 @@ public class ServidorService {
             Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    /**
+     * 
+     * @param menssage 
+     */
     private void sendOne(ChatMenssage menssage) {
         for (Map.Entry<String, ObjectOutputStream> kv : mapOnlines.entrySet()) {
             if (kv.getKey().equals(menssage.getNameReserved())) {
@@ -142,7 +170,10 @@ public class ServidorService {
             }
         }
     }
-
+    /**
+     * 
+     * @param message 
+     */
     private void sendAll(ChatMenssage message) {
         for (Map.Entry<String, ObjectOutputStream> kv : mapOnlines.entrySet()) {
             if (!kv.getKey().equals(message.getName())) {
@@ -155,7 +186,9 @@ public class ServidorService {
             }
         }
     }
-
+    /**
+     * 
+     */
     private void sendOnlines() {
         Set<String> setNames = new HashSet<String>();
         for (Map.Entry<String, ObjectOutputStream> kv : mapOnlines.entrySet()) {

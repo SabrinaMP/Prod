@@ -31,8 +31,12 @@ public class ContadorDAO {
         con = ConnectionFactory.getConnection();
 
     }
-
-    //cadastro produto  
+    /**
+     * 
+     * @param contador
+     * @return 
+     */
+   
     public boolean save(Contador contador) {
         String sql = "INSERT INTO contador(nm_nick) VALUES (?)";
         PreparedStatement stmt = null;
