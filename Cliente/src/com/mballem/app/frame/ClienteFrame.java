@@ -215,7 +215,7 @@ public class ClienteFrame extends javax.swing.JFrame {
         btnLimpar.setBackground(new java.awt.Color(0, 0, 0));
         btnLimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnLimpar.setForeground(new java.awt.Color(255, 255, 255));
-        btnLimpar.setText("CLEAR");
+        btnLimpar.setText("LIMPAR");
         btnLimpar.setEnabled(false);
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -226,7 +226,7 @@ public class ClienteFrame extends javax.swing.JFrame {
         btnEnviar.setBackground(new java.awt.Color(0, 0, 0));
         btnEnviar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnEnviar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEnviar.setText("ENTER");
+        btnEnviar.setText("ENVIAR");
         btnEnviar.setEnabled(false);
         btnEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -268,7 +268,7 @@ public class ClienteFrame extends javax.swing.JFrame {
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(253, Short.MAX_VALUE)
+                .addContainerGap(256, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(248, 248, 248))
         );
@@ -324,6 +324,7 @@ public class ClienteFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (evt.getKeyCode() == evt.VK_ENTER) {
             //MÉTODO DO BOTÃO AQUI
+            enter();
         }
     }//GEN-LAST:event_txtAreaSendKeyPressed
 
@@ -352,20 +353,8 @@ public class ClienteFrame extends javax.swing.JFrame {
         }
         this.service.send(menssage);
     }//GEN-LAST:event_btnConectarActionPerformed
-
-    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
-        ChatMenssage message = new ChatMenssage();
-        message.setName(this.menssage.getName());
-        message.setAction(Action.DISCONNCT);
-        this.service.send(message);
-        disconnect();
-    }//GEN-LAST:event_btnSairActionPerformed
-
-    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        this.txtAreaSend.setText("");
-    }//GEN-LAST:event_btnLimparActionPerformed
-
-    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+ 
+    public void enter(){
         String text = this.txtAreaSend.getText();
         String name = this.menssage.getName();
         
@@ -389,6 +378,22 @@ public class ClienteFrame extends javax.swing.JFrame {
         }
         
         this.txtAreaSend.setText("");
+        
+    }
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        ChatMenssage message = new ChatMenssage();
+        message.setName(this.menssage.getName());
+        message.setAction(Action.DISCONNCT);
+        this.service.send(message);
+        disconnect();
+    }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        this.txtAreaSend.setText("");
+    }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+        enter();
     }//GEN-LAST:event_btnEnviarActionPerformed
 
 
