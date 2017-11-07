@@ -8,12 +8,20 @@ package com.mballem.app;
 import com.mballem.app.frame.ClienteFrame;
 
 /**
- *
- * @author Administrador
+ * * @author Guilher D
+ * @author Kevin S
+ * @author Luan J
+ * @author Sabrina M
+ * @author Victor B
+ * 
+ * @version 1
+ * 
+ * 
  */
 public class Cliente {
     /**
-     * @param args the command line arguments
+     * @param args os argumrntos da linha de comando
+     * Faz a inicialização
      */
     public static void main(String args[]) {
          try {

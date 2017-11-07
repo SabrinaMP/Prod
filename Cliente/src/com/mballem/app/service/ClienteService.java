@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.mballem.app.service;
 
 import com.mballem.app.bean.ChatMenssage;
@@ -16,6 +12,7 @@ import java.util.logging.Logger;
 /**
  *
  * @author Kevin
+ * Conexão com o servidor
  */
 public class ClienteService {
     private Socket socket;
