@@ -34,13 +34,11 @@ public class ContadorDAO {
 
     //cadastro produto  
     public boolean save(Contador contador) {
-        String sql = "INSERT INTO contador(nm_nick,nr_logs,nr_count_palavrao) VALUES (?,?,?)";
+        String sql = "INSERT INTO contador(nm_nick) VALUES (?)";
         PreparedStatement stmt = null;
         try {
             stmt = con.prepareStatement(sql);
             stmt.setString(2, contador.getNm_nick());
-            stmt.setInt(3, contador.getNr_logs());
-            stmt.setInt(4, contador.getNr_count_palavrao());
             stmt.executeUpdate();
 
             return true;
@@ -51,34 +49,5 @@ public class ContadorDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }
     }    
-
-    /**
-     * Método que atualiza um produto do banco de dados
-     *
-     * @param contador (Objeto)
-     * @return boolean
-     */
-
-    public boolean atualizar(Contador contador) {
-        String sql = "UPDATE contador SET nr_nick = ?, nr_logs = ?, nr_count_palavrao = ? WHERE cd_usuario=?";
-        PreparedStatement stmt = null;
-        try {
-            stmt = con.prepareStatement(sql);
-            stmt = con.prepareStatement(sql);
-            stmt.setString(2, contador.getNm_nick());
-            stmt.setInt(3, contador.getNr_logs());
-            stmt.setInt(4, contador.getNr_count_palavrao());
-            stmt.setInt(4, contador.getCd_usuario());
-            stmt.executeUpdate();
-            
-
-            return true;
-        } catch (SQLException ex) {
-            System.err.println("Erro ao excluir produto: " + ex);
-            return false;
-        } finally {
-            ConnectionFactory.closeConnection(con, stmt);
-        }
-
-    }
+    
 }
