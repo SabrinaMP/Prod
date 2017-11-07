@@ -42,6 +42,7 @@ public class ClienteFrame extends javax.swing.JFrame {
     }
 
     private class listenerSocket implements Runnable {
+
         private ObjectInputStream input;
 
         public listenerSocket(Socket socket) {
@@ -85,7 +86,6 @@ public class ClienteFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Conexão não realizada!\nTente novamente com um novo nome.");
             return;
         }
-        
 
         this.menssage = menssage;
         this.btnConectar.setEnabled(false);
@@ -98,13 +98,12 @@ public class ClienteFrame extends javax.swing.JFrame {
         this.btnLimpar.setEnabled(true);
 
         JOptionPane.showMessageDialog(this, "Você está conectado no chat!");
-        
-        
+
         String nick = new String(txtName.getText());
-        
+
         Contador p = new Contador(nick);
         ContadorDAO dao = new ContadorDAO();
-        
+
         p.setNm_nick(nick);
     }
 
@@ -117,7 +116,7 @@ public class ClienteFrame extends javax.swing.JFrame {
         this.txtAreaReceive.setEnabled(false);
         this.btnEnviar.setEnabled(false);
         this.btnLimpar.setEnabled(false);
-        
+
         this.txtAreaReceive.setText("");
         this.txtAreaSend.setText("");
 
@@ -129,15 +128,15 @@ public class ClienteFrame extends javax.swing.JFrame {
     }
 
     private void refreshOnlines(ChatMenssage menssage) {
-        
+
         System.out.println(menssage.getSetOnlines().toString());
-        
+
         Set<String> names = menssage.getSetOnlines();
-        
+
         names.remove(menssage.getName());
-        
+
         String[] array = (String[]) names.toArray(new String[names.size()]);
-        
+
         this.listOnlines.setListData(array);
         this.listOnlines.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.listOnlines.setLayoutOrientation(JList.VERTICAL);
@@ -222,7 +221,7 @@ public class ClienteFrame extends javax.swing.JFrame {
         jScrollPane2.setViewportView(txtAreaSend);
 
         listOnlines.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "--------" };
+            String[] strings = { "                 " };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -338,14 +337,11 @@ public class ClienteFrame extends javax.swing.JFrame {
 
     private void txtAreaSendKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAreaSendKeyPressed
         // TODO add your handling code here:
-        if (menssage.getText().equals("NO")) {
-            this.txtAreaSend.setText("");
-            JOptionPane.showMessageDialog(this, "Deu Certo");
-            return;
-        }     
+
         if (evt.getKeyCode() == evt.VK_ENTER) {
             //MÉTODO DO BOTÃO AQUI
             enter();
+
         }
     }//GEN-LAST:event_txtAreaSendKeyPressed
 
@@ -362,7 +358,7 @@ public class ClienteFrame extends javax.swing.JFrame {
         if (!name.isEmpty()) {
             this.menssage = new ChatMenssage();
             this.menssage.setAction(Action.CONNECT);
-            this.menssage.setName(name);    
+            this.menssage.setName(name);
 
             this.service = new ClienteService();
             this.Socket = this.service.connect();
@@ -371,21 +367,26 @@ public class ClienteFrame extends javax.swing.JFrame {
             btnEnviar.enable(true);
             btnLimpar.enable(true);
             btnSair.enable(true);
-            
-        }else{
+
+        } else {
             this.txtName.setText("");
             JOptionPane.showMessageDialog(this, "Conexão não realizada!\nDigite um Nickname.");
             return;
         }
         this.service.send(menssage);
     }//GEN-LAST:event_btnConectarActionPerformed
- 
-    public void enter(){
+
+    public void enter() {
         String text = this.txtAreaSend.getText();
         String name = this.menssage.getName();
-        
+
+        if (this.txtAreaSend.getText().equals("")) {
+            this.txtAreaSend.setText("");
+            return;
+        }
+
         this.menssage = new ChatMenssage();
-        
+
         if (this.listOnlines.getSelectedIndex() > -1) {
             this.menssage.setNameReserved((String) this.listOnlines.getSelectedValue());
             this.menssage.setAction(Action.SEND_ONE);
@@ -393,18 +394,18 @@ public class ClienteFrame extends javax.swing.JFrame {
         } else {
             this.menssage.setAction(Action.SEND_ALL);
         }
-        
+
         if (!text.isEmpty()) {
             this.menssage.setName(name);
             this.menssage.setText(text);
 
             this.txtAreaReceive.append("Você disse: " + text + "\n");
-            
+
             this.service.send(this.menssage);
         }
-        
+
         this.txtAreaSend.setText("");
-        
+
     }
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         ChatMenssage message = new ChatMenssage();
@@ -424,9 +425,8 @@ public class ClienteFrame extends javax.swing.JFrame {
 
     private void txtNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameFocusLost
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_txtNameFocusLost
 
+    }//GEN-LAST:event_txtNameFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
