@@ -338,6 +338,11 @@ public class ClienteFrame extends javax.swing.JFrame {
 
     private void txtAreaSendKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAreaSendKeyPressed
         // TODO add your handling code here:
+        if (menssage.getText().equals("NO")) {
+            this.txtAreaSend.setText("");
+            JOptionPane.showMessageDialog(this, "Deu Certo");
+            return;
+        }     
         if (evt.getKeyCode() == evt.VK_ENTER) {
             //MÉTODO DO BOTÃO AQUI
             enter();
