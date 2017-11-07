@@ -21,8 +21,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import model.bean.Contador;
-import model.dao.ContadorDAO;
 
 /**
  *
