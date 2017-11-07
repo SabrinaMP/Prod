@@ -11,8 +11,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Data: 05/09/2017
- * @author Tarcnux
+ * * @author Guilher D
+ * @author Kevin S
+ * @author Luan J
+ * @author Sabrina M
+ * @author Victor B
+ * 
+ * @version 1
+ * 
+ * Conexão e fechamento de conexões com o banco de dados
+ * 
  */
 public class ConnectionFactory {
     private static final String DRIVER = "com.mysql.jdbc.Driver";

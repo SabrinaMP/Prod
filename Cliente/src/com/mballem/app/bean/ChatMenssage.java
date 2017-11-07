@@ -11,8 +11,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- *
- * @author Administrador
+ * @author Guilher D
+ * @author Kevin S
+ * @author Luan J
+ * @author Sabrina M
+ * @author Victor B
+ * 
+ * @version 1
+ * 
+ * Classe ChatMenssage, criação de variaveis, getters e setters
+ * 
  */
 public class ChatMenssage implements Serializable {
     private String name;
