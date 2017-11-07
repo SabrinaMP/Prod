@@ -20,8 +20,7 @@ public class Contador {
      * @param nr_logs
      * @param nr_count_palavrao 
      */
-    public Contador(int cd_usuario, String nm_nick, int nr_logs, int nr_count_palavrao) {
-        this.cd_usuario = cd_usuario;
+    public Contador(){
         this.nm_nick = nm_nick;
     }
 

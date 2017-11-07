@@ -18,6 +18,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.bean.Contador;
+import model.dao.ContadorDAO;
 
 /**
  * @author Guilher D
@@ -113,16 +115,28 @@ public class ServidorService {
         if (mapOnlines.size() == 0) {
             menssage.setText("YES");
             send(menssage, output);
+            Contador p = new Contador();
+            ContadorDAO dao = new ContadorDAO();
+            p.setNm_nick(menssage.getName());
+            dao.save(p);
             return true;
         }
 
         if (mapOnlines.containsKey(menssage.getName())) {
             menssage.setText("NO");
             send(menssage, output);
+            Contador p = new Contador();
+            ContadorDAO dao = new ContadorDAO();
+            p.setNm_nick(menssage.getName());
+            dao.save(p);
             return false;
         } else {
             menssage.setText("YES");
             send(menssage, output);
+            Contador p = new Contador();
+            ContadorDAO dao = new ContadorDAO();
+            p.setNm_nick(menssage.getName());
+            dao.save(p);
             return true;
         }
     }

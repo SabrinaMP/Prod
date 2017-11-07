@@ -42,7 +42,7 @@ public class ContadorDAO {
         PreparedStatement stmt = null;
         try {
             stmt = con.prepareStatement(sql);
-            stmt.setString(2, contador.getNm_nick());
+            stmt.setString(1, contador.getNm_nick());
             stmt.executeUpdate();
 
             return true;
