@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package model.dao;
 
 import connection.ConnectionFactory;
@@ -15,13 +11,15 @@ import java.util.List;
 import model.bean.Contador;
 
 /**
- *
- * @author victor
- *
- * Classe Data Access Object Realiza as 4 operações CRUD no banco de dados
- * criar, ler, Atualizar e excluir Data: 18/09/2017
- *
- */
+ * @author Guilher D
+ * @author Kevin S
+ * @author Luan J
+ * @author Sabrina M
+ * @author Victor B
+ * 
+ * @version 1
+ * 
+ */ 
 public class ContadorDAO {
 
     // atributo de conexão
@@ -32,7 +30,11 @@ public class ContadorDAO {
 
     }
 
-    //cadastro produto  
+      /**
+       * Salva as pessoas que já utilizaram o secret
+       * @param contador
+       * @return booleam
+       */
     public boolean save(Contador contador) {
         String sql = "INSERT INTO contador(nm_nick) VALUES (?)";
         PreparedStatement stmt = null;
@@ -43,7 +45,7 @@ public class ContadorDAO {
 
             return true;
         } catch (SQLException ex) {
-            System.err.println("Erro ao cadastrar produto: " + ex);
+            System.err.println("Erro: " + ex);
             return false;
         } finally {
             ConnectionFactory.closeConnection(con, stmt);

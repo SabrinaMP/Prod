@@ -1,13 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package model.bean;
 
 /**
  *
- * @author victo
+ * @author victor
+ * getter e setter para inserção de dados do banco 
  */
 public class Contador {
     private int cd_usuario;
