@@ -29,7 +29,6 @@ public class ContadorDAO {
 
     public ContadorDAO() {
         con = ConnectionFactory.getConnection();
-
     }
     /**
      * 
@@ -47,7 +46,7 @@ public class ContadorDAO {
 
             return true;
         } catch (SQLException ex) {
-            System.err.println("Erro ao cadastrar produto: " + ex);
+            System.err.println("Erro ao cadastrar: " + ex);
             return false;
         } finally {
             ConnectionFactory.closeConnection(con, stmt);

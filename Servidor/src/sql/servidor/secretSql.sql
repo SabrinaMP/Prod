@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 31, 2017 at 11:37 PM
+-- Generation Time: Nov 07, 2017 at 10:19 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -32,9 +32,7 @@ USE `secret`;
 
 CREATE TABLE `contador` (
   `cd_usuario` int(11) NOT NULL,
-  `nm_nick` varchar(15) NOT NULL,
-  `nr_logs` int(11) NOT NULL,
-  `nr_count_palavrao` int(11) NOT NULL
+  `nm_nick` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
