@@ -19,7 +19,7 @@ import java.util.Set;
  * @author Victor B
  * 
  * @version 1 
- * construtor, gets e sets
+ * construtor, getters e setters
  */
 public class ChatMenssage implements Serializable {
     private String name;

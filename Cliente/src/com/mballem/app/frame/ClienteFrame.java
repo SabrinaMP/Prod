@@ -22,6 +22,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+
 /**
  *
  * @author victor
@@ -96,7 +97,6 @@ public class ClienteFrame extends javax.swing.JFrame {
         this.btnLimpar.setEnabled(true);
 
         JOptionPane.showMessageDialog(this, "Você está conectado no chat!");
-
     }
 
     private void disconnect() {
@@ -157,6 +157,7 @@ public class ClienteFrame extends javax.swing.JFrame {
         btnLimpar = new javax.swing.JButton();
         btnEnviar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButtonInfo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Secret");
@@ -250,6 +251,13 @@ public class ClienteFrame extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Nick Name");
 
+        jButtonInfo.setText("Info");
+        jButtonInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInfoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -278,6 +286,10 @@ public class ClienteFrame extends javax.swing.JFrame {
                 .addContainerGap(256, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(248, 248, 248))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jButtonInfo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,7 +313,9 @@ public class ClienteFrame extends javax.swing.JFrame {
                         .addComponent(btnLimpar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnEnviar)))
-                .addGap(58, 58, 58))
+                .addGap(18, 18, 18)
+                .addComponent(jButtonInfo)
+                .addGap(17, 17, 17))
         );
 
         txtName.getAccessibleContext().setAccessibleName("");
@@ -359,7 +373,7 @@ public class ClienteFrame extends javax.swing.JFrame {
             btnEnviar.enable(true);
             btnLimpar.enable(true);
             btnSair.enable(true);
-
+        
         } else {
             this.txtName.setText("");
             JOptionPane.showMessageDialog(this, "Conexão não realizada!\nDigite um Nickname.");
@@ -420,12 +434,20 @@ public class ClienteFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtNameFocusLost
 
+    private void jButtonInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInfoActionPerformed
+        InfoFrame frame = new InfoFrame();
+        
+        frame.setVisible(true);
+        
+    }//GEN-LAST:event_jButtonInfoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConectar;
     private javax.swing.JButton btnEnviar;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnSair;
+    private javax.swing.JButton jButtonInfo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
