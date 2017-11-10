@@ -181,8 +181,17 @@ public class ServidorService {
         for (Map.Entry<String, ObjectOutputStream> kv : mapOnlines.entrySet()) {
             setNames.add(kv.getKey());
         }
-
+        
         ChatMenssage menssage = new ChatMenssage();
+        
+        ContadorDAO cDAO = new ContadorDAO();
+        int cont = 0;
+        for(Contador c : cDAO.findAll()){
+            cont += 1;
+        }
+        menssage.setCaount(cont);
+        System.out.println(menssage.getCaount() + "//teste");
+        
         menssage.setAction(Action.USERS_ONLINE);
         menssage.setSetOnlines(setNames);
 

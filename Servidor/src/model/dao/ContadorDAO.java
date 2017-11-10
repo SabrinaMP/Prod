@@ -51,6 +51,32 @@ public class ContadorDAO {
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
+    }
+    public List<Contador> findAll(){
+        String sql = "SELECT * FROM contador";
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        List<Contador> contador = new ArrayList<>();
+        
+        try {
+            stmt = con.prepareCall(sql);
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                Contador cont = new Contador();
+                cont.setCd_usuario(rs.getInt("cd_usuario"));
+                cont.setNm_nick(rs.getString("nm_nick"));
+                contador.add(cont);
+            }
+            
+        } catch (SQLException ex) {
+            System.err.println("Erro: " + ex);
+        } finally{
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return contador;
+        
     }    
     
 }
