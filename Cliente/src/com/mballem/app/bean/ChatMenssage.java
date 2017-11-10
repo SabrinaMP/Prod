@@ -26,6 +26,7 @@ public class ChatMenssage implements Serializable {
     private String name;
     private String text;
     private String nameReserved;
+    private int caount;
     private Set<String> setOnlines = new HashSet<String>();
     private Action action; 
 
@@ -61,6 +62,14 @@ public class ChatMenssage implements Serializable {
         this.setOnlines = setOnlines;
     }
 
+    public int getCaount() {
+        return caount;
+    }
+
+    public void setCaount(int caount) {
+        this.caount = caount;
+    }
+    
     public Action getAction() {
         return action;
     }
