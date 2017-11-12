@@ -350,6 +350,11 @@ public class ClienteFrame extends javax.swing.JFrame {
                 jButtonInfoActionPerformed(evt);
             }
         });
+        jButtonInfo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonInfoKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -520,16 +525,22 @@ public class ClienteFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtAreaSendKeyPressed
 
     private void jButtonInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInfoActionPerformed
+        info();
+    }//GEN-LAST:event_jButtonInfoActionPerformed
+    private void info(){
         InfoFrame frame = new InfoFrame();
 
         frame.setVisible(true);
-    }//GEN-LAST:event_jButtonInfoActionPerformed
-
+    }
     private void btnConectarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnConectarKeyPressed
         if (evt.getKeyCode() == evt.VK_ENTER){
             salvar();
         }
     }//GEN-LAST:event_btnConectarKeyPressed
+
+    private void jButtonInfoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonInfoKeyPressed
+        info();
+    }//GEN-LAST:event_jButtonInfoKeyPressed
 
     public void enter() {
         String text = this.txtAreaSend.getText();
