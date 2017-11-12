@@ -29,8 +29,8 @@ public class Servidor {
      */
     public static void main(String[] args) {
         ContadorDAO dao = new ContadorDAO();
-        //dao.delete();
         dao.save();
+        dao.delete();
         new ServidorService();
     }
     

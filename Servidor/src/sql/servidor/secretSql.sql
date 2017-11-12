@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 07, 2017 at 10:19 PM
--- Server version: 10.1.26-MariaDB
--- PHP Version: 7.1.8
+-- Generation Time: 12-Nov-2017 às 19:50
+-- Versão do servidor: 10.1.26-MariaDB
+-- PHP Version: 7.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -27,12 +27,12 @@ USE `secret`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contador`
+-- Estrutura da tabela `contador`
 --
 
 CREATE TABLE `contador` (
   `cd_usuario` int(11) NOT NULL,
-  `nm_nick` varchar(15) NOT NULL
+  `nr_cont` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -53,7 +53,8 @@ ALTER TABLE `contador`
 -- AUTO_INCREMENT for table `contador`
 --
 ALTER TABLE `contador`
-  MODIFY `cd_usuario` int(11) NOT NULL AUTO_INCREMENT;COMMIT;
+  MODIFY `cd_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -48,7 +48,7 @@ public class ContadorDAO {
             System.err.println("Erro ao cadastrar: " + ex);
             return false;
         } finally {
-            ConnectionFactory.closeConnection(con, stmt);
+            //ConnectionFactory.closeConnection(con, stmt);
         }
     }
    
@@ -62,7 +62,7 @@ public class ContadorDAO {
         } catch (SQLException ex) {
             System.err.println("Erro d0: " + ex);
         }finally{
-            ConnectionFactory.closeConnection(con, stmt);
+            //ConnectionFactory.closeConnection(con, stmt);
         }
     }
     public void delete(){
@@ -77,27 +77,31 @@ public class ContadorDAO {
             System.err.println("Erro d1: " + ex);
             //return false;
         }finally{
-            ConnectionFactory.closeConnection(con, stmt);
+            //ConnectionFactory.closeConnection(con, stmt);
         }
     }
-    public void buscar(){
+    public int buscar(){
+        int teste = 0;
         String sql = "SELECT nr_cont FROM contador WHERE cd_usuario = 1;";
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
             stmt = con.prepareCall(sql);
             rs = stmt.executeQuery();
+
             while (rs.next()) {
                 Contador cont = new Contador();
-                cont.setNr_cont(rs.getInt("nr_cont"));
+                teste = rs.getInt("nr_cont");
+                cont.setNr_cont(teste);
                 System.out.println("treste: "+cont.getNr_cont());
             }
             rs.close();
-            stmt.close();
+            return teste;
         } catch (SQLException ex) {
-            System.err.println("Erro d2: " + ex);
+            System.err.println("Erro ao buscar: " + ex);
+            return teste;
         }finally{
-            ConnectionFactory.closeConnection(con, stmt, rs);
+            //ConnectionFactory.closeConnection(con, stmt, rs);
         }
     }
     
