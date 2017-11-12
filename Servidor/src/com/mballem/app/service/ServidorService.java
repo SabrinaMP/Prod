@@ -84,11 +84,12 @@ public class ServidorService {
                         if (isConnect) {
                             mapOnlines.put(menssage.getName(), output);
                             sendOnlines();
-                            Contador p = new Contador();
                             ContadorDAO dao = new ContadorDAO();
-                            p.setNm_nick(menssage.getName());
-                            dao.save(p);
-                            System.out.println("Teste:"+p.getNm_nick());
+                            dao.update();
+                            Contador cont = new Contador();
+                            dao.buscar();
+                            System.out.println("é aqui "+cont.getNr_cont());
+                            menssage.setCaount(cont.getNr_cont());
                         }
                     } else if (action.equals(Action.DISCONNCT)) {
                         disconnect(menssage, output);
@@ -178,22 +179,14 @@ public class ServidorService {
    
     private void sendOnlines() {
         Set<String> setNames = new HashSet<String>();
+        ChatMenssage menssage = new ChatMenssage();
         for (Map.Entry<String, ObjectOutputStream> kv : mapOnlines.entrySet()) {
             setNames.add(kv.getKey());
-        }
-        
-        ChatMenssage menssage = new ChatMenssage();
-        
-        ContadorDAO cDAO = new ContadorDAO();
-        int cont = 0;
-        for(Contador c : cDAO.findAll()){
-            cont += 1;
-        }
-        menssage.setCaount(cont);
-        System.out.println(menssage.getCaount() + "//teste");
+        }        
         
         menssage.setAction(Action.USERS_ONLINE);
         menssage.setSetOnlines(setNames);
+        
 
         for (Map.Entry<String, ObjectOutputStream> kv : mapOnlines.entrySet()) {
             menssage.setName(kv.getKey());

@@ -1,26 +1,23 @@
 /*
- * Classe que realiza a conexão com o banco de dados MySQL
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package connection;
 
-
+import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
+
+
+
 /**
- * 
- * @author Guilher D
- * @author Kevin S
- * @author Luan J
- * @author Sabrina M
- * @author Victor B
- * 
- * @version 1
- * 
- * 
+ *
+ * @author Windows
  */
 public class ConnectionFactory {
     private static final String DRIVER = "com.mysql.jdbc.Driver";
@@ -28,64 +25,47 @@ public class ConnectionFactory {
     private static final String USER = "root";
     private static final String PASS = "";
     
-    /**
-     * Faz a conexão com o banco de dados
-     * @return caso ocorra erro, retorna uma mensagem de erro de conexão
-     */
     public static Connection getConnection(){
         try {
             Class.forName(DRIVER);
             return DriverManager.getConnection(URL, USER, PASS);
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new RuntimeException("Erro na conexão: " + ex);
+//            Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro na conexão", ex);
         }
     }
-    //Fechar a Conexão
-    /**
-     * Fecha a conexão com o banco de dados
-     * @param con 
-     */
+    
+    //Fechando a conexão
     public static void closeConnection(Connection con){
-       if(con != null) {
-           try {
-               con.close();
-           } catch (SQLException ex) {
-               System.err.println("Erro ao fechar a conexão: " + ex);
-           }
-       }
+        if(con != null){
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.err.println("Erro: " + ex);
+            }
+        }
     }
-    /**
-     * Fecha conexão com Prepared Statement
-     * @param con
-     * @param stmt 
-     */
-    //Fechar a Conexão com Prepared Statement
+    //Fechando o PreparedStatement
     public static void closeConnection(Connection con, PreparedStatement stmt){
-       if(stmt != null) {
-           try {
-               stmt.close();
-           } catch (SQLException ex) {
-               System.err.println("Erro ao fechar PreparedStatement: " + ex);
-           }
-       }
+        if(stmt != null){
+            try {
+                stmt.close();
+            } catch (SQLException ex) {
+                System.err.println("Erro: " + ex);
+            }
+        }
         closeConnection(con);
     }
-    /**
-     * Fecha conexão com o ResultSet
-     * @param con
-     * @param stmt
-     * @param rs 
-     */
-    //Fechando ResultSet
-    public static void closeConnection(Connection con, PreparedStatement stmt, ResultSet rs){
-       if(rs != null) {
-           try {
-               rs.close();
-           } catch (SQLException ex) {
-               System.err.println("Erro ao fechar ResultSet: " + ex);
-           }
-       }
-        closeConnection(con,stmt);
-    }
     
-}
+    //Fechando o ResultSet
+    public static void closeConnection(Connection con, PreparedStatement stmt, ResultSet rs){
+        if(rs != null){
+            try {
+                rs.close();
+            } catch (SQLException ex) {
+                System.err.println("Erro: " + ex);
+            }
+        }
+        closeConnection(con,stmt);
+    }  
+ }

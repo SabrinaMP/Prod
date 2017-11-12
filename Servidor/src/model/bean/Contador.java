@@ -12,6 +12,7 @@ package model.bean;
 public class Contador {
     private int cd_usuario;
     private String nm_nick;
+    private int nr_cont;
 
     /**
      * 
@@ -38,5 +39,14 @@ public class Contador {
 
     public void setNm_nick(String nm_nick) {
         this.nm_nick = nm_nick;
+    }    
+
+    public int getNr_cont() {
+        return nr_cont;
     }
+
+    public void setNr_cont(int nr_cont) {
+        this.nr_cont = nr_cont;
+    }
+    
 }

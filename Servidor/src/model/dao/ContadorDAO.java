@@ -35,13 +35,12 @@ public class ContadorDAO {
      * @param contador
      * @return 
      */
-   
-    public boolean save(Contador contador) {
-        String sql = "INSERT INTO contador(nm_nick) VALUES (?)";
+    public boolean save() {
+        String sql = "INSERT INTO contador(nr_cont) VALUES (0)";
         PreparedStatement stmt = null;
         try {
             stmt = con.prepareStatement(sql);
-            stmt.setString(1, contador.getNm_nick());
+            //stmt.setString(1, contador.getNm_nick());
             stmt.executeUpdate();
 
             return true;
@@ -52,31 +51,54 @@ public class ContadorDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }
     }
-    public List<Contador> findAll(){
-        String sql = "SELECT * FROM contador";
+   
+    public void update() {
+        String sql = "UPDATE contador SET nr_cont = nr_cont + 1 WHERE cd_usuario = 1;";
+        PreparedStatement stmt = null;
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.executeUpdate();
+            System.out.println("teste testado");
+        } catch (SQLException ex) {
+            System.err.println("Erro d0: " + ex);
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+    public void delete(){
+        String sql = "DELETE  FROM contador WHERE cd_usuario > 1";
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.executeUpdate();
+            //return true;
+        } catch (SQLException ex) {
+            System.err.println("Erro d1: " + ex);
+            //return false;
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+    public void buscar(){
+        String sql = "SELECT nr_cont FROM contador WHERE cd_usuario = 1;";
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        
-        List<Contador> contador = new ArrayList<>();
-        
         try {
             stmt = con.prepareCall(sql);
             rs = stmt.executeQuery();
-            
-            while(rs.next()){
+            while (rs.next()) {
                 Contador cont = new Contador();
-                cont.setCd_usuario(rs.getInt("cd_usuario"));
-                cont.setNm_nick(rs.getString("nm_nick"));
-                contador.add(cont);
+                cont.setNr_cont(rs.getInt("nr_cont"));
+                System.out.println("treste: "+cont.getNr_cont());
             }
-            
+            rs.close();
+            stmt.close();
         } catch (SQLException ex) {
-            System.err.println("Erro: " + ex);
-        } finally{
+            System.err.println("Erro d2: " + ex);
+        }finally{
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
-        return contador;
-        
-    }    
+    }
     
 }
