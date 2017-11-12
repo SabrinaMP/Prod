@@ -40,7 +40,7 @@ public class ClienteFrame extends javax.swing.JFrame {
         initComponents();
         jPanel2.setVisible(false);
         btnSair.setVisible(false);
-        Countlbl.setVisible(false);
+        painelcont.setVisible(false);
     }
 
     private class listenerSocket implements Runnable {
@@ -85,7 +85,7 @@ public class ClienteFrame extends javax.swing.JFrame {
     private void connect(ChatMenssage menssage) {
         jPanel2.setVisible(true);
         btnSair.setVisible(true);
-        Countlbl.setVisible(true);
+        painelcont.setVisible(true);
         btnConectar.setVisible(false);
         if (menssage.getText().equals("NO")) {
             this.txtName.setText("");
@@ -96,16 +96,14 @@ public class ClienteFrame extends javax.swing.JFrame {
         this.menssage = menssage;
         this.btnConectar.setEnabled(false);
         this.txtName.setEditable(false);
+        System.out.println("Cont é: "+this.menssage.getCaount());
+        Countlbl.setText(String.valueOf(this.menssage.getCaount()));
 
         this.btnSair.setEnabled(true);
         this.txtAreaSend.setEnabled(true);
         this.txtAreaReceive.setEnabled(true);
         this.btnEnviar.setEnabled(true);
         this.btnLimpar.setEnabled(true);
-        
-        int c = menssage.getCaount();
-        this.Countlbl.setText(String.valueOf(c));
-        this.Countlbl.setText(String.valueOf(menssage.getCaount()));
         JOptionPane.showMessageDialog(this, "Você está conectado no chat!");
     }
 
@@ -139,7 +137,8 @@ public class ClienteFrame extends javax.swing.JFrame {
 
         Set<String> names = menssage.getSetOnlines();
         
-        
+        System.out.println("Cont é: "+this.menssage.getCaount());
+        Countlbl.setText(String.valueOf(this.menssage.getCaount()));
         names.remove(menssage.getName());
 
         String[] array = (String[]) names.toArray(new String[names.size()]);
@@ -147,7 +146,7 @@ public class ClienteFrame extends javax.swing.JFrame {
         this.listOnlines.setListData(array);
         this.listOnlines.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.listOnlines.setLayoutOrientation(JList.VERTICAL);
-        
+                
     }
 
     /**
@@ -159,6 +158,7 @@ public class ClienteFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jProgressBar1 = new javax.swing.JProgressBar();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -176,6 +176,7 @@ public class ClienteFrame extends javax.swing.JFrame {
         btnConectar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         jButtonInfo = new javax.swing.JButton();
+        painelcont = new javax.swing.JPanel();
         Countlbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -317,6 +318,11 @@ public class ClienteFrame extends javax.swing.JFrame {
                 btnConectarActionPerformed(evt);
             }
         });
+        btnConectar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnConectarKeyPressed(evt);
+            }
+        });
 
         btnSair.setBackground(new java.awt.Color(0, 0, 0));
         btnSair.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -345,10 +351,6 @@ public class ClienteFrame extends javax.swing.JFrame {
             }
         });
 
-        Countlbl.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        Countlbl.setForeground(new java.awt.Color(255, 255, 255));
-        Countlbl.setText("0");
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -365,9 +367,7 @@ public class ClienteFrame extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Countlbl)
-                    .addComponent(jButtonInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jButtonInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -378,15 +378,35 @@ public class ClienteFrame extends javax.swing.JFrame {
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(btnConectar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(Countlbl)))
+                .addComponent(btnConectar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         txtName.getAccessibleContext().setAccessibleName("");
+
+        painelcont.setBackground(new java.awt.Color(0, 0, 0));
+        painelcont.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Logs de usuario", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("MS PGothic", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+
+        Countlbl.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        Countlbl.setForeground(new java.awt.Color(255, 255, 255));
+        Countlbl.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Countlbl.setText("0");
+        Countlbl.setEnabled(false);
+
+        javax.swing.GroupLayout painelcontLayout = new javax.swing.GroupLayout(painelcont);
+        painelcont.setLayout(painelcontLayout);
+        painelcontLayout.setHorizontalGroup(
+            painelcontLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelcontLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Countlbl, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        painelcontLayout.setVerticalGroup(
+            painelcontLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Countlbl)
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -396,10 +416,14 @@ public class ClienteFrame extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(painelcont, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -407,12 +431,13 @@ public class ClienteFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(jLabel2)
-                        .addGap(30, 30, 30))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(painelcont, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 314, Short.MAX_VALUE))
         );
 
@@ -438,29 +463,31 @@ public class ClienteFrame extends javax.swing.JFrame {
         this.service.send(message);
         disconnect();
     }//GEN-LAST:event_btnSairActionPerformed
-
-    private void btnConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConectarActionPerformed
+    private void salvar(){
         String name = this.txtName.getText();
 
         if (!name.isEmpty()) {
             this.menssage = new ChatMenssage();
             this.menssage.setAction(Action.CONNECT);
             this.menssage.setName(name);
-
+                   
             this.service = new ClienteService();
             this.Socket = this.service.connect();
-
+                      
             new Thread(new listenerSocket(this.Socket)).start();
             btnEnviar.enable(true);
             btnLimpar.enable(true);
             btnSair.enable(true);
-
+            
         } else {
             this.txtName.setText("");
             JOptionPane.showMessageDialog(this, "Conexão não realizada!\nDigite um Nickname.");
             return;
         }
         this.service.send(menssage);
+    }
+    private void btnConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConectarActionPerformed
+        salvar();
     }//GEN-LAST:event_btnConectarActionPerformed
 
     private void txtNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameFocusLost
@@ -497,6 +524,12 @@ public class ClienteFrame extends javax.swing.JFrame {
 
         frame.setVisible(true);
     }//GEN-LAST:event_jButtonInfoActionPerformed
+
+    private void btnConectarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnConectarKeyPressed
+        if (evt.getKeyCode() == evt.VK_ENTER){
+            salvar();
+        }
+    }//GEN-LAST:event_btnConectarKeyPressed
 
     public void enter() {
         String text = this.txtAreaSend.getText();
@@ -542,10 +575,12 @@ public class ClienteFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList<String> listOnlines;
+    private javax.swing.JPanel painelcont;
     private javax.swing.JTextArea txtAreaReceive;
     private javax.swing.JTextArea txtAreaSend;
     private javax.swing.JTextField txtName;
