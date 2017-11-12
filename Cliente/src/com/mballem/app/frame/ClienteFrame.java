@@ -128,7 +128,7 @@ public class ClienteFrame extends javax.swing.JFrame {
     }
 
     private void receive(ChatMenssage menssage) {
-        this.txtAreaReceive.append(menssage.getName() + "diz :" + menssage.getText() + "\n");
+        this.txtAreaReceive.append(menssage.getName() + " diz :" + menssage.getText() + "\n");
     }
 
     private void refreshOnlines(ChatMenssage menssage) {
