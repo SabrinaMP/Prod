@@ -180,7 +180,7 @@ public class ClienteFrame extends javax.swing.JFrame {
         Countlbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("BlindEye");
+        setTitle(".dOT");
         setBackground(new java.awt.Color(51, 51, 51));
         setResizable(false);
 
@@ -298,7 +298,7 @@ public class ClienteFrame extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mballem/app/frame/battle.png"))); // NOI18N
 
         jPanel4.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255)), "Nick Name", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("MS PGothic", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", 0, 0, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255)), "Nick Name", 2, 0, new java.awt.Font("MS PGothic", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
 
         txtName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtName.setToolTipText("");
@@ -391,7 +391,7 @@ public class ClienteFrame extends javax.swing.JFrame {
         txtName.getAccessibleContext().setAccessibleName("");
 
         painelcont.setBackground(new java.awt.Color(0, 0, 0));
-        painelcont.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Logs de usuario", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("MS PGothic", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        painelcont.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Logs de usuario", 2, 0, new java.awt.Font("MS PGothic", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
 
         Countlbl.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         Countlbl.setForeground(new java.awt.Color(255, 255, 255));

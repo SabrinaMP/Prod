@@ -20,8 +20,7 @@ public class ClienteService {
     
     public Socket connect() {
         try {
-            //this.socket = new Socket("10.1.21.15", 8080);
-            this.socket = new Socket("192.168.1.6", 8080);
+            this.socket = new Socket("10.1.21.15", 8080);
             this.output = new ObjectOutputStream(socket.getOutputStream());
         } catch (UnknownHostException ex) {
             Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);
