@@ -1,8 +1,8 @@
 # Prod
 
-BlindEye é um programa de chat anônimo para pessoas mais fechadas que querem conversar, ou pra pessoas que só querem bater um papo sem compromisso, imagine que você quer conversar com alguém mas é muito tímido ou com baixa autoestima, ou até mesmo conversar com alguém sem compromisso de manter contato, pois a pessoa não vai saber sua identidade caso queira conhecer a pessoa melhor, chama no zap.
+.dOT. é um programa de chat anônimo para pessoas mais fechadas que querem conversar, ou pra pessoas que só querem bater um papo sem compromisso, imagine que você quer conversar com alguém mas é muito tímido ou com baixa autoestima, ou até mesmo conversar com alguém sem compromisso de manter contato, pois a pessoa não vai saber sua identidade caso queira conhecer a pessoa melhor, chama no zap.
 
-Imagine poder falar sobre qualquer coisa, a qualquer momento, com qualquer pessoa e em qualquer idioma! com BlindEye isso se torna possível. 
+Imagine poder falar sobre qualquer coisa, a qualquer momento, com qualquer pessoa e em qualquer idioma! com .dOT. isso se torna possível. 
 
 Regras: É expressamente proibido conversas que de certa forma sirvam de ofensa a qualquer tipo de estilo de vida, assuntos que envolvam qualquer forma de preconceito ou ameaça.
 
