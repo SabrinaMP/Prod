@@ -85,7 +85,6 @@ public class ClienteFrame extends javax.swing.JFrame {
     private void connect(ChatMenssage menssage) {
         jPanel2.setVisible(true);
         btnSair.setVisible(true);
-        painelcont.setVisible(true);
         btnConectar.setVisible(false);
         if (menssage.getText().equals("NO")) {
             this.txtName.setText("");
@@ -98,6 +97,7 @@ public class ClienteFrame extends javax.swing.JFrame {
         this.txtName.setEditable(false);
         System.out.println("Cont é: "+this.menssage.getCaount());
         Countlbl.setText(String.valueOf(this.menssage.getCaount()));
+        
 
         this.btnSair.setEnabled(true);
         this.txtAreaSend.setEnabled(true);
@@ -105,12 +105,13 @@ public class ClienteFrame extends javax.swing.JFrame {
         this.btnEnviar.setEnabled(true);
         this.btnLimpar.setEnabled(true);
         JOptionPane.showMessageDialog(this, "Você está conectado no chat!");
+        painelcont.setVisible(true);
     }
 
     private void disconnect() {
         jPanel2.setVisible(false);
         btnSair.setVisible(false);
-        Countlbl.setVisible(false);
+        //Countlbl.setVisible(false);
         btnConectar.setVisible(true);
         this.btnConectar.setEnabled(true);
         this.txtName.setEditable(true);
@@ -125,6 +126,7 @@ public class ClienteFrame extends javax.swing.JFrame {
         this.txtAreaSend.setText("");
 
         JOptionPane.showMessageDialog(this, "Você saiu do chat!");
+        painelcont.setVisible(false);
     }
 
     private void receive(ChatMenssage menssage) {
@@ -483,6 +485,7 @@ public class ClienteFrame extends javax.swing.JFrame {
             btnEnviar.enable(true);
             btnLimpar.enable(true);
             btnSair.enable(true);
+            //painelcont.setVisible(true);
             
         } else {
             this.txtName.setText("");
